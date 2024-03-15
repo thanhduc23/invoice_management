@@ -35,7 +35,6 @@ const SignUp = () => {
     console.log(data);
     try {
       setIsSubmitting(true);
-      // Bạn sẽ cần thực thi hàm signUp tại đây và xử lý kết quả hoặc lỗi
       await signUp(data);
       alert("Đăng ký thành công!");
     } catch (err) {
