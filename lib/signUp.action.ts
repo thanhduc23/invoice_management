@@ -1,5 +1,7 @@
 "use server";
 import { signUpFormSchemaType } from "@/types";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export const signUp = async (data: signUpFormSchemaType) => {
   try {
@@ -15,12 +17,14 @@ export const signUp = async (data: signUpFormSchemaType) => {
     );
 
     if (!response.ok) {
-      throw new Error("Signup failed");
+      alert("Signup failed");
+      redirect("/sign-up");
     }
 
     const result = await response.json();
-
     console.log("Signup successful", result);
+    revalidatePath("/");
+    redirect("/");
   } catch (error) {
     console.error("Signup error:", error);
   }
