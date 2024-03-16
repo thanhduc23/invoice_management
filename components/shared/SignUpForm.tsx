@@ -36,7 +36,6 @@ const SignUp = () => {
     try {
       setIsSubmitting(true);
       await signUp(data);
-      alert("Đăng ký thành công!");
     } catch (err) {
       alert("Đăng ký không thành công.");
     } finally {
@@ -48,7 +47,7 @@ const SignUp = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full flex-col flex gap-y-5 p-10 border-solid border-black rounded-md  border-2 max-w-[490px] "
+        className="w-full flex-col flex gap-y-5 p-10 border-solid border-black rounded-md border-2 max-w-[490px]"
       >
         <FormField
           control={form.control}
@@ -84,6 +83,19 @@ const SignUp = () => {
               <FormLabel>Phone number </FormLabel>
               <FormControl>
                 <Input type="text" placeholder="phone" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="userName"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Username </FormLabel>
+              <FormControl>
+                <Input type="text" placeholder="user name" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

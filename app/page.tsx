@@ -1,4 +1,4 @@
-import SignUp from "@/components/shared/SignUp";
+import SignUp from "@/components/shared/SignUpForm";
 
 export default function Home() {
   return (
