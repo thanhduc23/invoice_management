@@ -18,10 +18,11 @@ import {
   signUpFormBody,
   signUpFormBodyType,
 } from "@/SchemaValidations/auth.schema";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const router = useRouter();
   const form = useForm<signUpFormBodyType>({
     resolver: zodResolver(signUpFormBody),
     defaultValues: {
@@ -39,6 +40,7 @@ const SignUp = () => {
     try {
       setIsSubmitting(true);
       await signUp(data);
+      router.push("/");
     } catch (err) {
       console.error("Đăng ký không thành công.");
       setIsSubmitting(false);
@@ -54,41 +56,48 @@ const SignUp = () => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="w-full flex-col flex gap-y-5 p-10 border-double border-sky-800 rounded-lg border-2 min-w-[400px] max-w-[490px] light:border-black"
       >
-        <h2 className="text-2xl font-bold text-center mb-5">Sign Up</h2>
-        <FormField
-          control={form.control}
-          name="first_name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>First name</FormLabel>
-              <FormControl>
-                <Input type="text" placeholder="First name" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="last_name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Last name</FormLabel>
-              <FormControl>
-                <Input type="text" placeholder="Last name" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <h2 className="text-2xl font-bold text-center mb-5">Đăng Ký</h2>
+        <div className="flex gap-x-5">
+          <FormField
+            control={form.control}
+            name="first_name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Tên</FormLabel>
+                <FormControl>
+                  <Input type="text" placeholder="Tên" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="last_name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Họ</FormLabel>
+                <FormControl>
+                  <Input type="text" placeholder="Họ" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
         <FormField
           control={form.control}
           name="phone"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Phone number </FormLabel>
+              <FormLabel>Số điện thoại </FormLabel>
               <FormControl>
-                <Input type="text" placeholder="phone" {...field} />
+                <Input
+                  type="text"
+                  placeholder="Nhập số điện thoại"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -99,9 +108,9 @@ const SignUp = () => {
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username </FormLabel>
+              <FormLabel>Tên tài khoản </FormLabel>
               <FormControl>
-                <Input type="text" placeholder="user name" {...field} />
+                <Input type="text" placeholder="Tên tài khoản" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -112,9 +121,9 @@ const SignUp = () => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password </FormLabel>
+              <FormLabel>Mật khẩu </FormLabel>
               <FormControl>
-                <Input type="password" placeholder="Password" {...field} />
+                <Input type="password" placeholder="Mật khẩu" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

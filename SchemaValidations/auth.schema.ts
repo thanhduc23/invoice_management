@@ -21,3 +21,10 @@ export const signUpFormBody = z.object({
 });
 
 export type signUpFormBodyType = z.infer<typeof signUpFormBody>;
+
+export const signInFormBody = z.object({
+  username: z.string().min(5, "user name phải ít nhất 5 ký tự."),
+  password: z.string().min(8, "Mật khẩu có ít nhất 8 ký tự."),
+});
+
+export type signInFormBodyTypeType = z.infer<typeof signInFormBody>;
