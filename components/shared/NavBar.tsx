@@ -6,7 +6,7 @@ import Logo from "../../assets/images/404-team-high-resolution-logo-transparent.
 
 const NavBar = () => {
   return (
-    <header className="w-full px-2">
+    <header className="w-full p-5">
       <nav className="flex items-center justify-between">
         <Link href={"/"}>
           <Image src={Logo} width={150} height={80} alt="logo" />
