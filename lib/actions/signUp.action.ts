@@ -5,7 +5,7 @@ import { signUpFormBodyType } from "@/SchemaValidations/auth.schema";
 export const signUp = async (data: signUpFormBodyType) => {
   try {
     const result = await fetch(
-      `https://scrum-team-be.vercel.app/api-view/sign-up/`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api-view/sign-up/`,
       {
         method: "POST",
         headers: {

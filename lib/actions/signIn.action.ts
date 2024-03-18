@@ -3,7 +3,7 @@ import { signInFormBodyTypeType } from "@/SchemaValidations/auth.schema";
 export const login = async (data: signInFormBodyTypeType) => {
   try {
     const response = await fetch(
-      `https://scrum-team-be.vercel.app/api/token/`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/token/`,
       {
         method: "POST",
         headers: {
