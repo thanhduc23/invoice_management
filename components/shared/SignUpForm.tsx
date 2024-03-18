@@ -12,7 +12,7 @@ import {
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 
-import { signUp } from "@/lib/signUp.action";
+import { signUp } from "@/lib/actions/signUp.action";
 import { useState } from "react";
 import {
   signUpFormBody,
@@ -23,6 +23,7 @@ import { useRouter } from "next/navigation";
 const SignUp = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+
   const form = useForm<signUpFormBodyType>({
     resolver: zodResolver(signUpFormBody),
     defaultValues: {
@@ -42,7 +43,6 @@ const SignUp = () => {
       await signUp(data);
       router.push("/");
     } catch (err) {
-      console.error("Đăng ký không thành công.");
       setIsSubmitting(false);
     } finally {
       setIsSubmitting(false);

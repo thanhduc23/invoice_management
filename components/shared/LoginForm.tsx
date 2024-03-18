@@ -11,18 +11,19 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-
-import { signUp } from "@/lib/signUp.action";
+import { toast } from "sonner";
 import { useState } from "react";
 import {
   signInFormBody,
   signInFormBodyTypeType,
 } from "@/SchemaValidations/auth.schema";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { login } from "@/lib/actions/signIn.action";
+import { setAuthTokens } from "@/utils/auth";
 
 const LoginForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const router = useRouter();
   const form = useForm<signInFormBodyTypeType>({
     resolver: zodResolver(signInFormBody),
     defaultValues: {
@@ -31,18 +32,30 @@ const LoginForm = () => {
     },
   });
 
+  const handleLoginSuccess = (tokens: { refresh: string; access: string }) => {
+    setAuthTokens(tokens);
+  };
   const onSubmit = async (data: signInFormBodyTypeType) => {
-    console.log(data);
-    // try {
-    //   setIsSubmitting(true);
-    //   await signUp(data);
-    // } catch (err) {
-    //   console.error("Đăng ký không thành công.");
-    //   setIsSubmitting(false);
-    // } finally {
-    //   setIsSubmitting(false);
-    //   form.reset();
-    // }
+    setIsSubmitting(true);
+    try {
+      const tokens = await login(data);
+      if (tokens) {
+        handleLoginSuccess(tokens);
+        console.log("Đăng nhập thành công");
+      }
+      toast("Đăng nhập thành công", {
+        description: "Chúc mừng bạn đã đăng nhập thành công.",
+      });
+      router.push("/");
+    } catch (err) {
+      // console.error("Đăng nhập thất bại:", err);
+      toast("Đăng nhập thất bại", {
+        description: "Vui lòng kiểm tra lại thông tin đăng nhập.",
+      });
+    } finally {
+      setIsSubmitting(false);
+      form.reset();
+    }
   };
 
   return (
