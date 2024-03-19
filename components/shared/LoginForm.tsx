@@ -11,11 +11,11 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { toast } from "sonner";
+import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
 import {
   signInFormBody,
-  signInFormBodyTypeType,
+  signInFormBodyType,
 } from "@/SchemaValidations/auth.schema";
 import { useRouter } from "next/navigation";
 import { login } from "@/lib/actions/signIn.action";
@@ -24,7 +24,8 @@ import { setAuthTokens } from "@/utils/auth";
 const LoginForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
-  const form = useForm<signInFormBodyTypeType>({
+  const { toast } = useToast();
+  const form = useForm<signInFormBodyType>({
     resolver: zodResolver(signInFormBody),
     defaultValues: {
       username: "",
@@ -35,7 +36,8 @@ const LoginForm = () => {
   const handleLoginSuccess = (tokens: { refresh: string; access: string }) => {
     setAuthTokens(tokens);
   };
-  const onSubmit = async (data: signInFormBodyTypeType) => {
+
+  const onSubmit = async (data: signInFormBodyType) => {
     setIsSubmitting(true);
     try {
       const tokens = await login(data);
@@ -43,14 +45,16 @@ const LoginForm = () => {
         handleLoginSuccess(tokens);
         console.log("Đăng nhập thành công");
       }
-      toast("Đăng nhập thành công", {
+      toast({
+        title: "Đăng nhập thành công",
         description: "Chúc mừng bạn đã đăng nhập thành công.",
       });
       router.push("/");
     } catch (err) {
-      // console.error("Đăng nhập thất bại:", err);
-      toast("Đăng nhập thất bại", {
-        description: "Vui lòng kiểm tra lại thông tin đăng nhập.",
+      toast({
+        variant: "destructive",
+        title: "Đăng nhập thât bại.",
+        description: "Vui lòng kiểm tra lại thông tin đăng nhập",
       });
     } finally {
       setIsSubmitting(false);
@@ -96,7 +100,7 @@ const LoginForm = () => {
         <Button
           disabled={isSubmitting}
           type={"submit"}
-          className="w-full mt-5 py-3 rounded-lg bg-blue-400 text-white font-semibold hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
+          className="w-full mt-5 py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
         >
           {isSubmitting ? "Vui lòng chờ..." : "Đăng nhập"}
         </Button>

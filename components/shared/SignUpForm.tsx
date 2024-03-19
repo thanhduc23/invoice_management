@@ -11,6 +11,7 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { useToast } from "@/components/ui/use-toast";
 
 import { signUp } from "@/lib/actions/signUp.action";
 import { useState } from "react";
@@ -23,7 +24,7 @@ import { useRouter } from "next/navigation";
 const SignUp = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
-
+  const { toast } = useToast();
   const form = useForm<signUpFormBodyType>({
     resolver: zodResolver(signUpFormBody),
     defaultValues: {
@@ -41,9 +42,18 @@ const SignUp = () => {
     try {
       setIsSubmitting(true);
       await signUp(data);
+      toast({
+        title: "Đăng kí thành công",
+        description: "Chúc mừng bạn đã đăng kí thành công.",
+      });
       router.push("/");
     } catch (err) {
       setIsSubmitting(false);
+      toast({
+        variant: "destructive",
+        title: "Đăng kí không thành công",
+        description: "Vui lòng kiểm tra lại thông tin đăng nhập.",
+      });
     } finally {
       setIsSubmitting(false);
       form.reset();
@@ -145,7 +155,7 @@ const SignUp = () => {
         <Button
           disabled={isSubmitting}
           type={"submit"}
-          className="w-full py-3 rounded-lg bg-blue-400 text-white font-semibold hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
+          className="w-full mt-5 py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
         >
           {isSubmitting ? "Vui lòng chờ..." : "Đăng kí"}
         </Button>

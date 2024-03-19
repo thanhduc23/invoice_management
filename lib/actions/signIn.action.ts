@@ -1,6 +1,6 @@
-import { signInFormBodyTypeType } from "@/SchemaValidations/auth.schema";
+import { signInFormBodyType } from "@/SchemaValidations/auth.schema";
 
-export const login = async (data: signInFormBodyTypeType) => {
+export const login = async (data: signInFormBodyType) => {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/token/`,

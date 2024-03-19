@@ -27,4 +27,4 @@ export const signInFormBody = z.object({
   password: z.string().min(8, "Mật khẩu có ít nhất 8 ký tự."),
 });
 
-export type signInFormBodyTypeType = z.infer<typeof signInFormBody>;
+export type signInFormBodyType = z.infer<typeof signInFormBody>;
