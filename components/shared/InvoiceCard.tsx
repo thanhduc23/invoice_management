@@ -6,7 +6,7 @@ const InvoiceCard = ({ invoice }: { invoice: any }) => {
   return (
     <Link
       href={`/${invoice.id}`}
-      className="w-full bg-white dark:bg-[#1E2139] grid-cols-2 sm:grid-cols-[50px_110px_repeat(3,1fr)_20px] grid md:grid-cols-[80px_120px_repeat(3,1fr)_20px] items-center py-6 sm:py-4 px-6 md:px-8 rounded-md font-medium text-sm text-primary gap-1 sm:gap-4"
+      className="w-full bg-white dark:bg-[#1E2139] grid-cols-2 sm:grid-cols-[50px_110px_repeat(3,1fr)_20px] grid md:grid-cols-[80px_120px_repeat(3,1fr)_20px] items-center py-6 sm:py-4 px-6 md:px-8 rounded-md font-medium text-sm text-primary gap-1 sm:gap-4 border-solid border-2 dark:border-none"
     >
       <div className="mb-6 font-bold uppercase sm:mb-0">
         <span className="text-[#7E88C3]">#</span>

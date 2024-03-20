@@ -1,7 +1,6 @@
-// getInvoices.action.ts
-
+"use server";
 import { getCustomer } from "./getCustomer.action";
-import { getProducts, getTotalPrice } from "./getProducts.action";
+import { getTotalPrice } from "./getProducts.action";
 
 export const getInvoices = async () => {
   try {
@@ -25,11 +24,23 @@ export const getInvoices = async () => {
       invoice.clientName = `${customer.first_name} ${customer.last_name}`;
       invoice.total = await getTotalPrice(invoice.products);
     }
-
-    console.log(invoices);
     return invoices;
   } catch (error) {
     console.error(`There was a problem fetching invoices: ${error}`);
     return [];
+  }
+};
+
+export const getNumOfInvoices = async () => {
+  try {
+    const invoiceResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/invoices/`
+    );
+    const invoiceData = await invoiceResponse.json();
+
+    return invoiceData.count;
+  } catch (error) {
+    console.error(`There was a problem fetching invoices: ${error}`);
+    return;
   }
 };

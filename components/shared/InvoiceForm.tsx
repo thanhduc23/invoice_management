@@ -20,6 +20,7 @@ import {
 } from "@/SchemaValidations/formInput.Schema";
 import { makeInvoice } from "@/lib/actions/makeInvoice.action";
 import { formatPrice } from "@/utils/format";
+import { CircleLoader } from "react-spinners";
 
 const InvoiceForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -299,7 +300,7 @@ const InvoiceForm = () => {
           type={"submit"}
           className="w-full mt-5 py-3 rounded-lg "
         >
-          {isSubmitting ? "Đang tạo..." : "Create"}
+          {isSubmitting ? <CircleLoader color="#3646d6" size={30} /> : "Create"}
         </Button>
       </form>
     </Form>

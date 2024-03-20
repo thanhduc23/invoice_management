@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/lib/redux/store/hooks";
 import { setAuthTokens } from "@/lib/redux/store/authSlice";
 import { login } from "@/lib/actions/signIn.action";
+import { CircleLoader } from "react-spinners";
 
 const LoginForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -105,7 +106,11 @@ const LoginForm = () => {
           type={"submit"}
           className="w-full mt-5 py-3 rounded-lg  focus:ring-opacity-50"
         >
-          {isSubmitting ? "Vui lòng chờ..." : "Đăng nhập"}
+          {isSubmitting ? (
+            <CircleLoader color="#3646d6" size={30} />
+          ) : (
+            "Đăng nhập"
+          )}
         </Button>
       </form>
     </Form>

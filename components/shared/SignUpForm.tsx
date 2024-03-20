@@ -20,6 +20,7 @@ import {
   signUpFormBodyType,
 } from "@/SchemaValidations/auth.schema";
 import { useRouter } from "next/navigation";
+import { CircleLoader } from "react-spinners";
 
 const SignUp = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -157,7 +158,11 @@ const SignUp = () => {
           type={"submit"}
           className="w-full mt-5 py-3"
         >
-          {isSubmitting ? "Vui lòng chờ..." : "Đăng kí"}
+          {isSubmitting ? (
+            <CircleLoader color="#3646d6" size={30} />
+          ) : (
+            "Đăng kí"
+          )}
         </Button>
       </form>
     </Form>

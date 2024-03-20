@@ -13,31 +13,25 @@ import {
 import { Button } from "@/components/ui/button";
 import InvoiceForm from "@/components/shared/InvoiceForm";
 
-const createNewInvoice = () => {};
-const InvoicesHeader = () => {
-  const numOfInvoices = 10;
+const InvoicesHeader = ({ numOfInvoices }: { numOfInvoices: number }) => {
   return (
     <div className="flex justify-between w-full">
       <div className="flex flex-col gap-1 sm:gap-2">
         <h1 className="text-[20px] sm:text-[32px] font-bold text-primary">
           Invoices
         </h1>
-        <p className="text-xs font-medium text-secondary">
-          {/* {numOfInvoices === 0
+        <p className="text-xs font-medium ">
+          {numOfInvoices === 0
             ? "No invoices"
-            : `There are ${numOfInvoices} total invoices`} */}
-          `There are ${numOfInvoices} total invoices`
+            : `There are ${numOfInvoices} total invoices`}
         </p>
       </div>
       <div className="flex items-center gap-6 sm:gap-10">
         <Sheet>
           <SheetTrigger asChild>
-            <Button
-              onClick={createNewInvoice}
-              className="flex gap-2 sm:gap-4 items-center p-1.5 pr-3 sm:p-2 sm:pr-4 text-xs font-bold capitalize rounded-full transition"
-            >
-              <span className="p-2.5 rounded-full">
-                <FaPlus />
+            <Button className="flex gap-1 sm:gap-4 items-center p-1.5 pr-3 sm:p-2 sm:pr-4 text-xs font-bold capitalize rounded-full transition">
+              <span className="p-2 rounded-full">
+                <FaPlus color="#FFFFFF" size={20} />
               </span>
               <div>
                 New <span className="hidden sm:inline">Invoice</span>
