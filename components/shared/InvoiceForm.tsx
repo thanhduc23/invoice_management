@@ -55,6 +55,7 @@ const InvoiceForm = () => {
   });
   const onSubmit = async (data: invoiceFormSchemaType) => {
     try {
+      console.log(data);
       setIsSubmitting(true);
       await makeInvoice(data);
       toast({
@@ -132,33 +133,48 @@ const InvoiceForm = () => {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="customer.company"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Company</FormLabel>
-                <FormControl>
-                  <Input type="text" placeholder="Company" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
-          <FormField
-            control={form.control}
-            name="customer.address"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Address</FormLabel>
-                <FormControl>
-                  <Input type="text" placeholder="Address" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="flex gap-x-5 w-full">
+            <FormField
+              control={form.control}
+              name="customer.company"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Company</FormLabel>
+                  <FormControl>
+                    <Input type="text" placeholder="Company" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="customer.address"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Address</FormLabel>
+                  <FormControl>
+                    <Input type="text" placeholder="Address" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="customer.city"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>City</FormLabel>
+                  <FormControl>
+                    <Input type="text" placeholder="City" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
           <div className="flex gap-x-5">
             <FormField
               control={form.control}
@@ -249,7 +265,6 @@ const InvoiceForm = () => {
               <FormItem>
                 <FormLabel>Total($)</FormLabel>
                 <FormControl>
-                  {/* Assuming you have a function to format your price, like `formatPrice` */}
                   <Input
                     type="text"
                     placeholder="Total"
@@ -282,7 +297,7 @@ const InvoiceForm = () => {
         <Button
           disabled={isSubmitting}
           type={"submit"}
-          className="w-full mt-5 py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
+          className="w-full mt-5 py-3 rounded-lg "
         >
           {isSubmitting ? "Đang tạo..." : "Create"}
         </Button>

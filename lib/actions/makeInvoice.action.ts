@@ -1,6 +1,8 @@
+"use server";
 import { invoiceFormSchemaType } from "@/SchemaValidations/formInput.Schema";
 
 export const makeInvoice = async (data: invoiceFormSchemaType) => {
+  console.log(JSON.stringify(data));
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api-view/invoice/`,

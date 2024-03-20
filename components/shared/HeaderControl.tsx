@@ -12,13 +12,12 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import InvoiceForm from "@/components/shared/InvoiceForm";
-import { cn } from "@/lib/utils";
 
 const createNewInvoice = () => {};
 const InvoicesHeader = () => {
   const numOfInvoices = 10;
   return (
-    <div className="  flex justify-between items-center p-10 mx-auto max-w-[70%] mt-10">
+    <div className="flex justify-between w-full">
       <div className="flex flex-col gap-1 sm:gap-2">
         <h1 className="text-[20px] sm:text-[32px] font-bold text-primary">
           Invoices
@@ -57,7 +56,9 @@ const InvoicesHeader = () => {
             <InvoiceForm />
             <SheetFooter className="mt-10">
               <SheetClose asChild>
-                <Button type="submit">Hủy</Button>
+                <Button type="submit" variant={"destructive"}>
+                  Hủy
+                </Button>
               </SheetClose>
             </SheetFooter>
           </SheetContent>

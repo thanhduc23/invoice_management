@@ -4,6 +4,8 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import NavBar from "@/components/shared/NavBar";
+
+import { Providers } from "@/lib/redux/store/provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -25,8 +27,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NavBar />
-          {children}
+          <Providers>
+            <NavBar />
+            {children}
+          </Providers>
 
           <Toaster />
         </ThemeProvider>

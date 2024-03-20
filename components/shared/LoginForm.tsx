@@ -18,11 +18,13 @@ import {
   signInFormBodyType,
 } from "@/SchemaValidations/auth.schema";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/lib/redux/store/hooks";
+import { setAuthTokens } from "@/lib/redux/store/authSlice";
 import { login } from "@/lib/actions/signIn.action";
-import { setAuthTokens } from "@/utils/auth";
 
 const LoginForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const { toast } = useToast();
   const form = useForm<signInFormBodyType>({
@@ -34,7 +36,12 @@ const LoginForm = () => {
   });
 
   const handleLoginSuccess = (tokens: { refresh: string; access: string }) => {
-    setAuthTokens(tokens);
+    dispatch(setAuthTokens(tokens));
+    router.push("/");
+    toast({
+      title: "Đăng nhập thành công",
+      description: "Chúc mừng bạn đã đăng nhập thành công.",
+    });
   };
 
   const onSubmit = async (data: signInFormBodyType) => {
@@ -45,10 +52,6 @@ const LoginForm = () => {
         handleLoginSuccess(tokens);
         console.log("Đăng nhập thành công");
       }
-      toast({
-        title: "Đăng nhập thành công",
-        description: "Chúc mừng bạn đã đăng nhập thành công.",
-      });
       router.push("/");
     } catch (err) {
       toast({
@@ -100,7 +103,7 @@ const LoginForm = () => {
         <Button
           disabled={isSubmitting}
           type={"submit"}
-          className="w-full mt-5 py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
+          className="w-full mt-5 py-3 rounded-lg  focus:ring-opacity-50"
         >
           {isSubmitting ? "Vui lòng chờ..." : "Đăng nhập"}
         </Button>

@@ -155,7 +155,7 @@ const SignUp = () => {
         <Button
           disabled={isSubmitting}
           type={"submit"}
-          className="w-full mt-5 py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
+          className="w-full mt-5 py-3"
         >
           {isSubmitting ? "Vui lòng chờ..." : "Đăng kí"}
         </Button>
