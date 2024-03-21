@@ -31,7 +31,7 @@ const InvoicesHeader = ({ numOfInvoices }: { numOfInvoices: number }) => {
           <SheetTrigger asChild>
             <Button className="flex gap-1 sm:gap-4 items-center p-1.5 pr-3 sm:p-2 sm:pr-4 text-xs font-bold capitalize rounded-full transition">
               <span className="p-2 rounded-full">
-                <FaPlus color="#FFFFFF" size={20} />
+                <FaPlus color="#000000" size={20} />
               </span>
               <div>
                 New <span className="hidden sm:inline">Invoice</span>

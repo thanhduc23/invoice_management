@@ -5,7 +5,8 @@ import { getTotalPrice } from "./getProducts.action";
 export const getInvoices = async () => {
   try {
     const invoiceResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/invoices/`
+      `${process.env.NEXT_PUBLIC_API_URL}/invoices/`,
+      { cache: "no-store" }
     );
     const invoiceData = await invoiceResponse.json();
 
